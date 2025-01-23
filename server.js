@@ -1,5 +1,5 @@
 const express = require('express'); // Import Express
-const fetch = require('node-fetch'); // Import node-fetch
+const fetch = require('node-fetch'); // Import node-fetch (for Node.js < 18)
 const app = express(); // Create an Express application instance
 
 // Middleware to allow CORS
