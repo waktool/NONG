@@ -1,0 +1,198 @@
+/* General Styles */
+body {
+    font-family: 'Rubik', Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, h3, p {
+    font-family: 'Rubik', Arial, sans-serif;
+}
+
+
+#loading {
+    text-align: center;
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Clan Header */
+.clan-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 16px;
+    justify-content: center;
+}
+
+.clan-icon {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Card Container */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+    justify-content: center;
+}
+
+/* Individual Card */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+}
+
+/* Avatar Image */
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 16px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+#cardContainer {
+    display: flex; /* Use flexbox to align cards */
+    flex-wrap: wrap; /* Allow wrapping to a new row */
+    gap: 16px; /* Add spacing between cards */
+    justify-content: center; /* Center align the cards */
+    margin-top: 20px;
+}
+
+.card {
+    flex: 0 1 calc(300px - 16px); /* Make cards responsive with a fixed width */
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+}
+
+
+/* Card Content */
+.card-content {
+    text-align: center;
+    width: 100%;
+}
+
+/* Display Name Link */
+.card-content h3 a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-content h3 a:hover {
+    color: #007bff;
+}
+
+/* Username */
+.card-content .username {
+    font-size: 0.9rem;
+    color: #666;
+    margin: -8px 0 8px 0;
+}
+
+/* Permission Level Styles */
+.card-content .permission-level {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+.card-content .permission-level.member {
+    background-color: #007bff; /* Blue */
+}
+
+.card-content .permission-level.officer {
+    background-color: #28a745; /* Green */
+}
+
+.card-content .permission-level.owner {
+    background-color: #dc3545; /* Red */
+}
+
+/* Icons */
+.card-content .icon {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+
+.card-content .icon.large-icon {
+    width: 30px; /* Larger for Roblox.svg */
+    height: 30px;
+}
+
+/* Description in Speech Bubble */
+.card-content .description {
+    display: inline-block;
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 16px;
+}
+
+/* Optional: Custom Tooltip */
+.card-content p[title] {
+    position: relative;
+    cursor: pointer;
+}
+
+.card-content p[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%; /* Show above the element */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    z-index: 10;
+}
+
+.medals-container {
+    display: grid;
+    grid-template-columns: repeat(10, 20px); /* 10 columns, each 20px wide */
+    justify-content: center; /* Center the grid container */
+    gap: 5px; /* Add spacing between medals */
+    margin-top: 10px;
+}
+
+.medal-icon {
+    width: 20px;
+    height: 20px;
+}

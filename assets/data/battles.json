@@ -1,0 +1,90 @@
+[
+    {
+        "BattleID": "Christmas2023",
+        "StartDate": "2023-12-16"
+    },
+    {
+        "BattleID": "DecemberActiveHugePets",
+        "StartDate": "2023-12-30"
+    },
+    {
+        "BattleID": "IndexBattle",
+        "StartDate": "2024-01-20"
+    },
+    {
+        "BattleID": "AchBattle",
+        "StartDate": "2024-02-10"
+    },    
+    {
+        "BattleID": "RaidBattle",
+        "StartDate": "2024-02-24"
+    },   
+    {
+        "BattleID": "GoalBattleOne",
+        "StartDate": "2024-03-16"
+    },   
+    {
+        "BattleID": "GoalBattleTwo",
+        "StartDate": "2024-04-06"
+    },   
+    {
+        "BattleID": "GlitchBattle",
+        "StartDate": "2024-04-27"
+    },   
+    {
+        "BattleID": "PrisonBattle",
+        "StartDate": "2024-05-18"
+    },   
+    {
+        "BattleID": "HackerBattle",
+        "StartDate": "2024-06-08"
+    },   
+    {
+        "BattleID": "GoodEvilBattle",
+        "StartDate": "2024-06-22"
+    },   
+    {
+        "BattleID": "MillionaireRunBattle",
+        "StartDate": "2024-07-20"
+    },   
+    {
+        "BattleID": "RngBattle",
+        "StartDate": "2024-08-10"
+    },   
+    {
+        "BattleID": "CrabBattle",
+        "StartDate": "2024-08-31"
+    },   
+    {
+        "BattleID": "CatchingBattle",
+        "StartDate": "2024-09-21"
+    },
+    {
+        "BattleID": "HalloweenBattle",
+        "StartDate": "2024-10-19"
+    },
+    {
+        "BattleID": "LineBattle",
+        "StartDate": "2024-11-09"
+    },
+    {
+        "BattleID": "SantaBattle",
+        "StartDate": "2024-12-07"
+    },
+    {
+        "BattleID": "Christmas2024",
+        "StartDate": "2024-12-14"
+    },
+    {
+        "BattleID": "YearEnd2024",
+        "StartDate": "2024-12-21"
+    },
+    {
+        "BattleID": "NewYear2024",
+        "StartDate": "2024-12-28"
+    },
+    {
+        "BattleID": "SquidBattle",
+        "StartDate": "2025-01-11"
+    }                                                                      
+]
