@@ -1,9 +1,10 @@
-const express = require('express');
-const cors = require('cors'); // Import CORS middleware
-const fetch = require('node-fetch'); // Import node-fetch for API calls
+import express from 'express'; // Import Express
+import cors from 'cors'; // Import CORS
+import fetch from 'node-fetch'; // Import node-fetch
+
 const app = express();
 
-// Enable CORS for all routes
+// Enable CORS
 app.use(cors());
 
 // Proxy endpoint for user details
