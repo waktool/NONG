@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple proxy server for API requests",
   "main": "server.js",
-  "type": "module", // <-- Add this line
+  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
