@@ -7,7 +7,10 @@ const app = express();
 // Enable CORS
 app.use(cors());
 
-// Proxy endpoint for user details
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
+// Proxy endpoint for user details (single user)
 app.get('/api/user/:id', async (req, res) => {
     const { id } = req.params;
     const apiUrl = `https://users.roblox.com/v1/users/${id}`;
@@ -43,7 +46,33 @@ app.get('/api/avatar/:id', async (req, res) => {
     }
 });
 
-// New Proxy Endpoint for Clan Data
+// Proxy endpoint for batch user details
+app.post('/v1/users', async (req, res) => {
+    const apiUrl = `https://users.roblox.com/v1/users`;
+    const payload = req.body;
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            return res.status(response.status).json({ error: 'Failed to fetch batch user data from Roblox API' });
+        }
+
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching batch user data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Proxy endpoint for clan data
 app.get('/api/clan/nong', async (req, res) => {
     const clanApiUrl = 'https://biggamesapi.io/api/clan/nong';
 
