@@ -28,10 +28,18 @@ app.get('/api/user/:id', async (req, res) => {
     }
 });
 
-// Proxy endpoint for avatar headshot
-app.get('/api/avatar/:id', async (req, res) => {
-    const { id } = req.params;
-    const avatarApiUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${id}&size=100x100&format=Png&isCircular=true`;
+// Proxy endpoint for batch avatar thumbnails
+app.get('/v1/avatars', async (req, res) => {
+    const userIds = req.query.userIds; // Get the `userIds` query parameter
+    const size = req.query.size || '48x48'; // Optional size parameter
+    const format = req.query.format || 'Png'; // Optional format parameter
+    const isCircular = req.query.isCircular || 'false'; // Optional circular parameter
+
+    if (!userIds) {
+        return res.status(400).json({ error: 'Missing userIds parameter' });
+    }
+
+    const avatarApiUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userIds}&size=${size}&format=${format}&isCircular=${isCircular}`;
 
     try {
         const response = await fetch(avatarApiUrl);
@@ -39,7 +47,7 @@ app.get('/api/avatar/:id', async (req, res) => {
             return res.status(response.status).json({ error: 'Failed to fetch avatar data from Roblox API' });
         }
         const data = await response.json();
-        res.json(data);
+        res.json(data); // Respond with the fetched data
     } catch (error) {
         console.error('Error fetching avatar data:', error);
         res.status(500).json({ error: 'Internal server error' });
