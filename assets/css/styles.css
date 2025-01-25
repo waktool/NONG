@@ -4,7 +4,9 @@ body {
     margin: 20px;
 }
 
-h1, h3, p {
+h1,
+h3,
+p {
     font-family: 'Rubik', Arial, sans-serif;
 }
 
@@ -68,15 +70,20 @@ h1, h3, p {
 }
 
 #cardContainer {
-    display: flex; /* Use flexbox to align cards */
-    flex-wrap: wrap; /* Allow wrapping to a new row */
-    gap: 16px; /* Add spacing between cards */
-    justify-content: center; /* Center align the cards */
+    display: flex;
+    /* Use flexbox to align cards */
+    flex-wrap: wrap;
+    /* Allow wrapping to a new row */
+    gap: 16px;
+    /* Add spacing between cards */
+    justify-content: center;
+    /* Center align the cards */
     margin-top: 20px;
 }
 
 .card {
-    flex: 0 1 calc(300px - 16px); /* Make cards responsive with a fixed width */
+    flex: 0 1 calc(300px - 16px);
+    /* Make cards responsive with a fixed width */
     max-width: 300px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -127,15 +134,18 @@ h1, h3, p {
 }
 
 .card-content .permission-level.member {
-    background-color: #007bff; /* Blue */
+    background-color: #007bff;
+    /* Blue */
 }
 
 .card-content .permission-level.officer {
-    background-color: #28a745; /* Green */
+    background-color: #28a745;
+    /* Green */
 }
 
 .card-content .permission-level.owner {
-    background-color: #dc3545; /* Red */
+    background-color: #dc3545;
+    /* Red */
 }
 
 /* Icons */
@@ -148,7 +158,8 @@ h1, h3, p {
 
 
 .card-content .icon.large-icon {
-    width: 30px; /* Larger for Roblox.svg */
+    width: 30px;
+    /* Larger for Roblox.svg */
     height: 30px;
 }
 
@@ -172,7 +183,8 @@ h1, h3, p {
 .card-content p[title]:hover::after {
     content: attr(title);
     position: absolute;
-    bottom: 100%; /* Show above the element */
+    bottom: 100%;
+    /* Show above the element */
     left: 50%;
     transform: translateX(-50%);
     background-color: #333;
@@ -184,15 +196,94 @@ h1, h3, p {
     z-index: 10;
 }
 
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Medals Container */
 .medals-container {
     display: grid;
-    grid-template-columns: repeat(10, 20px); /* 10 columns, each 20px wide */
-    justify-content: center; /* Center the grid container */
-    gap: 5px; /* Add spacing between medals */
-    margin-top: 10px;
+    grid-template-columns: repeat(8, 20px);
+    /* 8 medals per row, fixed size */
+    gap: 2px;
+    /* Minimal spacing between medals */
+    justify-content: center;
+    /* Center items horizontally */
+    margin-top: 5px;
+    padding: 0;
 }
 
 .medal-icon {
     width: 20px;
     height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+/* Tooltip Wrapper */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    /* Ensure the tooltip wraps only the icon */
+}
+
+.tooltip-container .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 125%;
+    /* Position above the element */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    /* Dark background */
+    color: #fff;
+    /* White text */
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px;
+    border-radius: 8px;
+    /* Rounded corners */
+    text-align: center;
+    white-space: pre-line;
+    /* Allow line breaks */
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: max-content;
+    max-width: 250px;
+    /* Adjust as needed */
+}
+
+/* Tooltip Arrow */
+.tooltip-container .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    /* Align arrow at the bottom of tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Show Tooltip on Hover */
+.tooltip-container:hover .tooltip {
+    display: block;
 }

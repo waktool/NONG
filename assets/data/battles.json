@@ -1,90 +1,156 @@
 [
     {
         "BattleID": "Christmas2023",
-        "StartDate": "2023-12-16"
+        "Name": "Festive Clan Battle!",
+        "Description": "",
+        "StartDate": "2023-12-16",
+        "EndDate": "2023-12-29"
     },
     {
         "BattleID": "DecemberActiveHugePets",
-        "StartDate": "2023-12-30"
+        "Name": "New Year Clan Battle!",
+        "Description": "",
+        "StartDate": "2023-12-30",
+        "EndDate": "2024-01-19"
     },
     {
         "BattleID": "IndexBattle",
-        "StartDate": "2024-01-20"
+        "Name": "Pet Collecting Battle!",
+        "Description": "",
+        "StartDate": "2024-01-20",
+        "EndDate": "2024-02-09"
     },
     {
         "BattleID": "AchBattle",
-        "StartDate": "2024-02-10"
+        "Name": "Achievements Battle!",
+        "Description": "",
+        "StartDate": "2024-02-10",
+        "EndDate": "2024-02-21"
     },    
     {
         "BattleID": "RaidBattle",
-        "StartDate": "2024-02-24"
+        "Name": "Raid Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-02-24",
+        "EndDate": "2024-03-15"
     },   
     {
         "BattleID": "GoalBattleOne",
-        "StartDate": "2024-03-16"
+        "Name": "Quest Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-03-16",
+        "EndDate": "2024-03-29"
     },   
     {
         "BattleID": "GoalBattleTwo",
-        "StartDate": "2024-04-06"
+        "Name": "Pixel Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-04-06",
+        "EndDate": "2024-04-19"
     },   
     {
         "BattleID": "GlitchBattle",
-        "StartDate": "2024-04-27"
+        "Name": "Bubble Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-04-27",
+        "EndDate": "2024-05-10"
     },   
     {
         "BattleID": "PrisonBattle",
-        "StartDate": "2024-05-18"
+        "Name": "Fragmented Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-05-18",
+        "EndDate": "2024-05-31"
     },   
     {
         "BattleID": "HackerBattle",
-        "StartDate": "2024-06-08"
+        "Name": "Wicked Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-06-08",
+        "EndDate": "2024-06-21"
     },   
     {
         "BattleID": "GoodEvilBattle",
-        "StartDate": "2024-06-22"
+        "Name": "Safety Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-06-22",
+        "EndDate": "2024-07-05"
     },   
     {
         "BattleID": "MillionaireRunBattle",
-        "StartDate": "2024-07-20"
+        "Name": "Clown Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-07-20",
+        "EndDate": "2024-08-02"
     },   
     {
         "BattleID": "RngBattle",
-        "StartDate": "2024-08-10"
+        "Name": "Ice Cream Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-08-10",
+        "EndDate": "2024-08-23"
     },   
     {
         "BattleID": "CrabBattle",
-        "StartDate": "2024-08-31"
+        "Name": "Rave Crab Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-08-31",
+        "EndDate": "2024-09-13"
     },   
     {
         "BattleID": "CatchingBattle",
-        "StartDate": "2024-09-21"
+        "Name": "Reversed Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-09-21",
+        "EndDate": "2024-04-10"
     },
     {
         "BattleID": "HalloweenBattle",
-        "StartDate": "2024-10-19"
+        "Name": "Ghost Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-10-19",
+        "EndDate": "2024-11-01"
     },
     {
         "BattleID": "LineBattle",
-        "StartDate": "2024-11-09"
+        "Name": "Blimp Dragon Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-11-09",
+        "EndDate": "2024-11-23"
     },
     {
         "BattleID": "SantaBattle",
-        "StartDate": "2024-12-07"
+        "Name": "Bee Clan Battle!",
+        "Description": "",
+        "StartDate": "2024-12-07",
+        "EndDate": "2024-12-13"
     },
     {
         "BattleID": "Christmas2024",
-        "StartDate": "2024-12-14"
+        "Name": "Gingerbread Battle!",
+        "Description": "",
+        "StartDate": "2024-12-14",
+        "EndDate": "2024-12-20"
     },
     {
         "BattleID": "YearEnd2024",
-        "StartDate": "2024-12-21"
+        "Name": "Diamond Battle!",
+        "Description": "",
+        "StartDate": "2024-12-21",
+        "EndDate": "2024-12-27"
     },
     {
         "BattleID": "NewYear2024",
-        "StartDate": "2024-12-28"
+        "Name": "Blurred Battle!",
+        "Description": "",
+        "StartDate": "2024-12-28",
+        "EndDate": "2025-01-03"
     },
     {
         "BattleID": "SquidBattle",
-        "StartDate": "2025-01-11"
+        "Name": "Wyvern Battle!",
+        "Description": "",
+        "StartDate": "2025-01-11",
+        "EndDate": "2025-01-24"
     }                                                                      
 ]
