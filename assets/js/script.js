@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   const proxyBaseUrl = 'https://nong-uc04.onrender.com/';
-  const clanApiUrl = `${proxyBaseUrl}api/clan/nong`;
+
+  // Default clan name
+  let clanName = 'nong';
+
+  // Check if the URL has a `clan` parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('clan')) {
+    clanName = urlParams.get('clan');
+  }
+
+  const clanApiUrl = `${proxyBaseUrl}api/clan/${clanName}`;
   const usersApiUrl = `${proxyBaseUrl}v1/users`;
   const battlesJsonUrl = 'assets/data/battles.json';
 
