@@ -80,19 +80,20 @@ app.post('/v1/users', async (req, res) => {
     }
 });
 
-// Proxy endpoint for clan data
-app.get('/api/clan/nong', async (req, res) => {
-    const clanApiUrl = 'https://biggamesapi.io/api/clan/nong';
+// Proxy endpoint for clan data (dynamic clan)
+app.get('/api/clan/:clanName', async (req, res) => {
+    const { clanName } = req.params;
+    const clanApiUrl = `https://biggamesapi.io/api/clan/${clanName}`;
 
     try {
         const response = await fetch(clanApiUrl);
         if (!response.ok) {
-            return res.status(response.status).json({ error: 'Failed to fetch clan data from API' });
+            return res.status(response.status).json({ error: `Failed to fetch clan data for ${clanName} from API` });
         }
         const data = await response.json();
         res.json(data);
     } catch (error) {
-        console.error('Error fetching clan data:', error);
+        console.error(`Error fetching clan data for ${clanName}:`, error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
