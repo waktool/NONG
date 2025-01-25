@@ -64,14 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then(data => {
         if (data.status !== 'ok') throw new Error('Invalid Clan API response');
+        const iconUrl = `https://ps99.biggamesapi.io/image/${data.data.Icon.replace('rbxassetid://', '')}`; // Extract iconUrl here
         displayClanTitle(data.data);
-        processClanApiMembers(data.data);
+        processClanApiMembers(data.data, iconUrl); // Pass iconUrl
       })
       .catch(error => {
         showError(`Failed to fetch clan API data: ${error.message}`);
         throw error;
       });
-  }
+  }  
 
   // Display clan title
   function displayClanTitle(clanData) {
@@ -91,62 +92,28 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
-  // Adjust join times based on battles
-  function adjustJoinTimeBasedOnBattles(members, battlesApiData, battlesJsonData) {
-    members.forEach(member => {
-      // Find the earliest battle the user participated in (API data)
-      const userBattles = Object.keys(battlesApiData || {}).filter(battleId => {
-        return battlesApiData[battleId].AwardUserIDs.includes(Number(member.UserID)) ||
-              battlesApiData[battleId].PointContributions.some(c => c.UserID === member.UserID);
-      });
-
-      if (userBattles.length > 0) {
-        // Sort battles by their start date (from JSON)
-        userBattles.sort((a, b) => {
-          const startDateA = battlesJsonData[a]?.startDate || new Date();
-          const startDateB = battlesJsonData[b]?.startDate || new Date();
-          return startDateA - startDateB;
-        });
-
-        const earliestBattleId = userBattles[0];
-        const earliestBattleJson = battlesJsonData[earliestBattleId];
-
-        if (earliestBattleJson) {
-          const joinDate = new Date(member.JoinTime * 1000); // Convert to Date object
-          const endDate = earliestBattleJson.endDate;
-          const startDate = earliestBattleJson.startDate;
-
-          // Compare join date with battle end date
-          if (joinDate > endDate) {
-            member.JoinTime = Math.floor(startDate.getTime() / 1000); // Replace join time with battle start date
-          }
-        }
-      }
-    });
-  }
-
-  // Adjust the processClanApiMembers function to include this logic
-  async function processClanApiMembers(clanData) {
+  // Process clan members
+  async function processClanApiMembers(clanData, iconUrl) {
     const members = extractClanApiMembers(clanData);
     const userIds = members.map(member => member.UserID);
-
+  
     try {
       const [userDetails, avatarData] = await Promise.all([
         fetchUserDetailsApi(userIds),
         fetchAvatarThumbnailsApi(userIds),
       ]);
-
+  
       updateMembersWithApiData(members, userDetails, avatarData, clanData.DiamondContributions?.AllTime?.Data || []);
-
-      // Adjust join times using battles API and JSON data
+  
       adjustJoinTimeBasedOnBattles(members, clanData.Battles, battlesJsonData);
-
+  
       sortMembersByRank(members);
-      displayMembers(members, clanData.Battles);
+      displayMembers(members, clanData.Battles, iconUrl); // Pass iconUrl
     } catch (error) {
       showError(`Failed to process members: ${error.message}`);
     }
   }
+ 
 
   // Extract members from clan API data
   function extractClanApiMembers(clanData) {
@@ -171,30 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch avatar thumbnails from API
   async function fetchAvatarThumbnailsApi(userIds) {
     const avatarApiUrl = `${proxyBaseUrl}v1/avatars?userIds=${userIds.join(',')}&size=150x150&format=Png&isCircular=false`;
-    try {
-        const response = await fetch(avatarApiUrl);
-        if (!response.ok) {
-            console.error(`Error fetching avatar thumbnails: ${response.status}`);
-            throw new Error(`Avatar API responded with status: ${response.status}`);
-        }
-        const data = await response.json();
-        return userIds.map(userId => {
-            const avatar = data.data.find(item => item.targetId === userId);
-            return {
-                targetId: userId,
-                imageUrl: avatar?.imageUrl || 'https://via.placeholder.com/150', // Fallback to placeholder
-            };
-        });
-    } catch (error) {
-        console.error(`Failed to fetch avatars: ${error.message}`);
-        // Return placeholders for all user IDs if fetch fails
-        return userIds.map(userId => ({
-            targetId: userId,
-            imageUrl: 'https://via.placeholder.com/150', // Fallback placeholder
-        }));
-    }
+    const response = await fetch(avatarApiUrl);
+    if (!response.ok) throw new Error(`Error fetching avatar thumbnails: ${response.status}`);
+    return response.json().then(data => data.data);
   }
-
 
   // Update members with API data
   function updateMembersWithApiData(members, userDetails, avatarData, diamondContributions) {
@@ -214,15 +161,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Adjust join time based on battles.json
-  function adjustJoinTimeBasedOnBattlesJson(members) {
+  // Adjust join times based on battles
+  function adjustJoinTimeBasedOnBattles(members, battlesApiData, battlesJsonData) {
     members.forEach(member => {
-      const joinDate = new Date(member.JoinTime * 1000);
-      Object.values(battlesJsonData).forEach(battle => {
-        if (battle.endDate < joinDate) {
-          member.JoinTime = Math.floor(battle.startDate.getTime() / 1000);
-        }
+      const userBattles = Object.keys(battlesApiData || {}).filter(battleId => {
+        return battlesApiData[battleId].AwardUserIDs.includes(Number(member.UserID)) ||
+          battlesApiData[battleId].PointContributions.some(c => c.UserID === member.UserID);
       });
+
+      if (userBattles.length > 0) {
+        userBattles.sort((a, b) => {
+          const startDateA = battlesJsonData[a]?.startDate || new Date();
+          const startDateB = battlesJsonData[b]?.startDate || new Date();
+          return startDateA - startDateB;
+        });
+
+        const earliestBattleId = userBattles[0];
+        const earliestBattleJson = battlesJsonData[earliestBattleId];
+
+        if (earliestBattleJson) {
+          const joinDate = new Date(member.JoinTime * 1000);
+          if (joinDate > earliestBattleJson.endDate) {
+            member.JoinTime = Math.floor(earliestBattleJson.startDate.getTime() / 1000);
+          }
+        }
+      }
     });
   }
 
@@ -238,11 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Display members
-  function displayMembers(members, battlesApiData) {
+  function displayMembers(members, battlesApiData, iconUrl) {
     processBattlesApiData(battlesApiData, members);
-    members.forEach(member => addMemberCard(member));
+    members.forEach(member => addMemberCard(member, iconUrl)); // Pass iconUrl here
     loadingElement.classList.add('hidden');
   }
+  
 
   // Process battles from API and update members
   function processBattlesApiData(battlesApiData, members) {
@@ -267,19 +231,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Add member card
-  function addMemberCard(member) {
-    const card = createMemberCard(member);
+  function addMemberCard(member, iconUrl) {
+    const card = createMemberCard(member, iconUrl);
     cardContainer.appendChild(card);
   }
+  
 
   // Create member card
-  function createMemberCard(member) {
+  function createMemberCard(member, iconUrl) {
     const robloxProfileUrl = `https://www.roblox.com/users/${member.UserID}/profile`;
     const avatarUrl = member.avatarUrl || 'https://via.placeholder.com/150';
     const permissionLevel = member.PermissionLevel === 'Owner' ? 'Owner' : member.PermissionLevel === 90 ? 'Officer' : 'Member';
     const elapsedTime = formatElapsedTime(member.JoinTime);
     const hoverText = `Joined: ${formatJoinDate(member.JoinTime)}`;
-
+  
     return buildCardHtml({
       avatarUrl,
       robloxProfileUrl,
@@ -290,11 +255,24 @@ document.addEventListener('DOMContentLoaded', () => {
       hoverText,
       battlesHtml: buildBattlesHtml(member.battles),
       diamondContributions: formatDiamonds(member.diamondContributions),
+      iconUrl,
     });
   }
+  
 
   // Build member card HTML
-  function buildCardHtml({ avatarUrl, robloxProfileUrl, memberName, displayName, permissionLevel, elapsedTime, hoverText, battlesHtml, diamondContributions }) {
+  function buildCardHtml({
+    avatarUrl,
+    robloxProfileUrl,
+    memberName,
+    displayName,
+    permissionLevel,
+    elapsedTime,
+    hoverText,
+    battlesHtml,
+    diamondContributions,
+    iconUrl, // Added iconUrl
+  }) {
     const card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
@@ -308,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span>${permissionLevel}</span>
         </p>
         <p class="join-time" title="${hoverText}">
-          <img src="assets/images/nong.png" alt="Join Icon" class="icon">
+          <img src="${iconUrl}" alt="Join Icon" class="icon"> <!-- Use iconUrl dynamically -->
           ${elapsedTime}
         </p>
         <div class="battle-icons">
@@ -316,12 +294,13 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <p class="diamond-contribution">
           <img src="assets/images/diamonds.webp" alt="Diamonds Icon" class="icon">
-          ${diamondContributions} Diamonds
+          ${diamondContributions}
         </p>
       </div>
     `;
     return card;
   }
+  
 
   // Build battles HTML
   function buildBattlesHtml(battles) {
@@ -387,7 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'gold': return 'assets/images/gold.webp';
       case 'silver': return 'assets/images/silver.webp';
       case 'bronze': return 'assets/images/bronze.webp';
-      case 'good': return 'assets/images/good.png';
       default: return 'assets/images/none.png';
     }
   }
