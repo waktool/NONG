@@ -366,6 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'gold': return 'assets/images/gold.webp';
       case 'silver': return 'assets/images/silver.webp';
       case 'bronze': return 'assets/images/bronze.webp';
+      case 'good': return 'assets/images/good.png';
       default: return 'assets/images/none.png';
     }
   }
