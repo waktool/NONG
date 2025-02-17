@@ -152,14 +152,14 @@
         "Description": "",
         "StartDate": "2025-01-11",
         "EndDate": "2025-01-24"
-    }
+    },
     {
         "BattleID": "CannonBattle",
         "Name": "Mushroom Battle!",
         "Description": "",
         "StartDate": "2025-01-25",
         "EndDate": "2025-01-31"
-    }       
+    } ,     
     {
         "BattleID": "ValBattle",
         "Name": "Holographic Battle!",
